@@ -1,0 +1,70 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+<style>
+    form {
+        display: block;
+        margin: auto;
+    }
+
+    #selectedFiles img {
+            width: 600px;
+            height: 450px;
+            margin-bottom: 2%;
+    }
+
+</style>
+<div class="jumbotron text-center" style="padding: 4% 1%; background-color: white;">
+    <form id="myForm" method="post" enctype="multipart/form-data">
+        <h1 style="font-size: 30px;">Upload</h1> 
+        <input type="file" id="files" name="files" multiple accept="image/*" style="margin: auto; padding: 2% 0 2% 4%">
+        <div class="container" id="selectedFiles" style="padding: 1% 0 2%; display: block; text-align: center; background-color: white; font-size: 0;"></div>
+        
+        <br><br>
+    </form>
+
+    <button onclick="window.location.href='/list'" style="background-color: #297A4C; color: #FCEBDA; width: 100px; height: 30px; border: 0;">SUBMIT</button>
+
+</div>
+<script>
+	
+	var selDiv = "";
+		
+	document.addEventListener("DOMContentLoaded", init, false);
+	
+	function init() {
+		document.querySelector('#files').addEventListener('change', handleFileSelect, false);
+		selDiv = document.querySelector("#selectedFiles");
+	}
+		
+	function handleFileSelect(e) {
+		
+		if(!e.target.files || !window.FileReader) return;
+		
+		selDiv.innerHTML = "";
+		
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		filesArr.forEach(function(f) {
+			if(!f.type.match("image.*")) {
+				return;
+			}
+	
+			var reader = new FileReader();
+			reader.onload = function (e) {
+				var html = "<img src=\"" + e.target.result + "\">" + f.name + "<br clear=\"left\"/>";
+                selDiv.innerHTML += html;
+                				
+			}
+			reader.readAsDataURL(f); 
+			
+		});
+		
+		
+    }
+
+    
+
+</script>
+
+{% endblock %}
