@@ -9,36 +9,36 @@ import flask
 import pymysql.cursors
 from time import sleep
 
-from authlib.client import OAuth2Session
-import google.oauth2.credentials
-import googleapiclient.discovery
+import requests_oauthlib
+from requests_oauthlib.compliance_fixes import facebook_compliance_fix
 
-import google_auth
+FB_CLIENT_ID = "630669214555271"
+FB_CLIENT_SECRET = "630669214555271"
+FB_AUTHORIZATION_BASE_URL = "https://www.facebook.com/dialog/oauth"
+FB_TOKEN_URL = "https://graph.facebook.com/oauth/access_token"
+FB_SCOPE = ["email"]
 
-# Connect to the database
-connection = pymysql.connect(host='35.238.255.61',
-                             user='root',
-                             password='claimcart',
-                             db='claims',
-                             charset='utf8mb4',
-                             cursorclass=pymysql.cursors.DictCursor)
 
-app = flask.Flask(__name__)
-app.secret_key = "secret"
 
-app.register_blueprint(google_auth.app)
+# # Connect to the database
+# connection = pymysql.connect(host='35.238.255.61',
+#                              user='root',
+#                              password='claimcart',
+#                              db='claims',
+#                              charset='utf8mb4',
+#                              cursorclass=pymysql.cursors.DictCursor)
+
+# app = flask.Flask(__name__)
+# app.secret_key = "secret"
+
 
 @app.route('/')
 def index():
-    if google_auth.is_logged_in():
-        return render_template("home.html")
-    return render_template("login.html")
+	return render_template("login.html")
 
-def getEmail():
-    user_info = google_auth.get_user_info()
-    if user_info['email'] == "ayushdewan02@gmail.com":
-        return "mark@gmail.com"
-    return user_info['email']
+@app.route('/dashboard')
+def dashboard():
+	return render_template("dashboard.html")
     
 @app.route('/list')
 def list():
