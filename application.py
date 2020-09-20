@@ -44,6 +44,7 @@ def home():
         cursor.execute(sql)
         result = cursor.fetchall()
     for i in result:
+        # i["carbon"] *= 7
         if i["name"] == "Ayush":
             i["hls"] = True
         else: 
@@ -57,17 +58,41 @@ def dashboard():
     
 @app.route('/list')
 def list():
-    with connection.cursor() as cursor:
-        # Read a single record
-        sql = "SELECT `*` FROM `board`"
-        cursor.execute(sql)
-        result = cursor.fetchall()
+    import psutil
+    procs = {}
+    # Iterate over all running processes
+    for proc in psutil.process_iter():
+        # Get process detail as dictionary
+        pInfoDict = proc.as_dict(attrs=['pid', 'name', 'cpu_percent'])
+        p = psutil.Process(pInfoDict['pid'])
+        # x = p.memory_info()[1]
+        x = p.memory_percent(memtype="vms")
+        if pInfoDict["name"] not in procs:
+            procs[pInfoDict["name"]] = x
+        else:
+            procs[pInfoDict["name"]] += x
+
+    lst = []
+    for k in procs:
+        lst.append((procs[k], k))
+        lst.sort()
+        lst = lst[::-1]
+
+    exc = {"svchost.exe", "vmmem"}
+    result = []
+    process_id = 1
+    total_usage = 0
+    for i in lst:
+        if i[1] not in exc:
+            result.append({"id": process_id, "name": i[1], "bolts": i[0], "carbon": i[0]})
+            process_id += 1
+            total_usage += i[0]
+            if process_id > 10:
+                break
+
     for i in result:
-        if i["name"] == "Ayush":
-            i["hls"] = True
-        else: 
-            i["hls"] = False
-        print(i["name"], i["hls"])
+        i['bolts'] = round(44 * i['bolts'] / total_usage, 2)
+        i['carbon'] = round(87 * i['carbon'] / total_usage, 2)
     return render_template("dashboard.html", table=result)
 
 @app.route('/family')

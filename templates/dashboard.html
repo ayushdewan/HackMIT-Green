@@ -56,33 +56,29 @@
     opacity: 1;
   }
   </style>
-  <br /> <br /> <br /> <br /> 
+  <br /> <br /> <br /> <br />
+  <div class="container" style="padding: 2;">
   <table  class="table">
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Top Savers 🧑👧</th>
+        <th scope="col">Top Savers </th>
         <th scope="col">Bolts ⚡</th>
         <th scope="col">Carbon 🔥</th>
-        <th scope="col">Operating System 🍎🐧</th>
       </tr>
     </thead>
     <tbody>
       {% for i in table: %}
-        {% if i['hls'] %}
-        <tr class="table-active">
-        {% else %}
         <tr>
-        {% endif %}
           <th scope="row">{{ i['id'] }}</button></th>
           <td>{{ i['name'] }}</td>
           <td>{{ i['bolts'] }}</td>
           <td>{{ i['carbon'] }}</td>
-          <td>{{ i['os'] }}</td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
+</div> 
 
 
   <div class="form-popup" id="myForm" >
