@@ -6,8 +6,8 @@ import json
 import os
 
 import flask
-import pymysql.cursors
 from time import sleep
+import pymysql.cursors
 
 import requests_oauthlib
 from requests_oauthlib.compliance_fixes import facebook_compliance_fix
@@ -28,13 +28,13 @@ FB_SCOPE = ["email"]
 #                              charset='utf8mb4',
 #                              cursorclass=pymysql.cursors.DictCursor)
 
-# app = flask.Flask(__name__)
-# app.secret_key = "secret"
+app = flask.Flask(__name__)
+app.secret_key = "secret"
 
 
 @app.route('/')
 def index():
-	return render_template("login.html")
+	return render_template("home.html")
 
 @app.route('/dashboard')
 def dashboard():
