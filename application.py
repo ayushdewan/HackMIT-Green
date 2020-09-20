@@ -34,6 +34,10 @@ app.secret_key = "secret"
 
 @app.route('/')
 def index():
+	return render_template("login.html")
+
+@app.route('/home')
+def home():
 	return render_template("home.html")
 
 @app.route('/dashboard')
