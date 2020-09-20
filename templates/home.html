@@ -55,54 +55,38 @@
   opacity: 1;
 }
 </style>
+
+
+
 <div class="jumbotron text-center" style="padding: 2% 1%; background-color: white;">
-    <br><br>
-    <div class="container" style="background-color: #FCEBDA; height: 300px;">
-        <h1 style="color: #297A4C; padding: 5% 0 3%">GET STARTED!</h1>
-        <div class="zoom">
-            <button onclick="window.location.href='/upload'" style="background-color: #297A4C; color: #FCEBDA; width: 200px; height: 60px; border: 0;">UPLOAD YOUR PHOTOS</button>
-        </div>
-    </div>
-    <br><br>
+    <br>
+    <br>
+    <br>
     <div class="container" style="padding: 0;">
-        <div class="column" style="height: 230px; width: 33%; margin-right: 5%;">
-            <br><br>
-            <div class="zoom">
-                <button onclick="window.location.href='/list'" style="background-color: #297A4C; color: #FCEBDA; width: 200px; height: 60px; border: 0;">MY LIST</button>
-            </div>
-            <br>
-            <div class="zoom">
-                <button onclick="window.location.href='/family'" style="background-color: #297A4C; color: #FCEBDA; width: 200px; height: 60px; border: 0;">MY FAMILY'S LIST</button>
+        <div class="column" 
+        style="height: 600px; width: 300px; 
+              margin-right: 3%; border: 4px solid rgb(253, 232, 138)">
+
+          <div class="zoom">
+            <button onclick="window.location.href='/list'" 
+            style="background-color:rgb(253, 232, 138); 
+                  color:black; width: 295px; height: 60px; 
+                  border: 0; font-size: xx-large; font-weight: 500;">
+                  your statistics</button>
+        </div>
+
+          <h2><img style="height: 35px; width: 45px" src="/static/leaderboards.png" alt="logo" /> Ranking</h1>
+
+            <div class=container style='padding:0;'>
+                <b>3rd out of 10</b>
             </div>
         </div>
-        <div class="column" style="border: 4px solid black; height: 230px; width: 62%; ">
+        <div class="column" style="border: 4px solid black; height: 600px; width: 62%; ">
             <div class="row" style="width: 50%; margin: 0 30px">
                 <div class="column" style="width:40%">
-                    <h2 style="text-align: left; color: #297A4C">My Family</h2> 
+                    <h2 style="text-align: left; color: #000000">Leaderboards</h2> 
                 </div>
-                <div class="column" style="width:20%; margin: 4%">
-                    <div class="zoom">
-                        <input type="image" id="image" src="static/plus.png" onclick="openForm()" style="width: 40px;">
-                    </div>
-                </div>
-            </div>
-            <div class="row" style="margin-left: 10px;">
-                <div class="column" style="width:20%">
-                    <img src="static/fam3.png" style="width: 80%">
-                    <figcaption>Mary</figcaption>
-                </div>
-                <div class="column" style="width:20%">
-                    <img src="static/fam2.png" style="width: 80%">
-                    <figcaption>Mark</figcaption>
-                </div>
-                <div class="column" style="width:20%">
-                    <img src="static/fam1.png" style="width: 80%">
-                    <figcaption>Julia</figcaption>
-                </div>
-                <div class="column" style="width:20%">
-                    <img src="static/fam4.png" style="width: 80%">
-                    <figcaption>Andrew</figcaption>
-                </div>
+              
             </div>
         </div>
     </div>
