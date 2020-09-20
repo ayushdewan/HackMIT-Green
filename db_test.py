@@ -13,7 +13,7 @@ try:
     for i in f.readlines():
         with connection.cursor() as cursor:
             # Create a new record
-            sql = "INSERT INTO `items` (`user`, `name`, `quantity`, `price`, `description`) VALUES (%s, %s, %s, %s, %s)"
+            sql = "INSERT INTO `board` (`name`, `bolts`, `carbon`, `os`) VALUES (%s, %s, %s, %s)"
             print(tuple(i.split(", ")))
             cursor.execute(sql, tuple(i.split(", ")))
 

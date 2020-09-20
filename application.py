@@ -21,12 +21,12 @@ FB_SCOPE = ["email"]
 
 
 # # Connect to the database
-# connection = pymysql.connect(host='35.238.255.61',
-#                              user='root',
-#                              password='claimcart',
-#                              db='claims',
-#                              charset='utf8mb4',
-#                              cursorclass=pymysql.cursors.DictCursor)
+connection = pymysql.connect(host='35.238.255.61',
+                             user='root',
+                             password='claimcart',
+                             db='claims',
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)
 
 app = flask.Flask(__name__)
 app.secret_key = "secret"
@@ -38,7 +38,18 @@ def index():
 
 @app.route('/home')
 def home():
-	return render_template("home.html")
+    with connection.cursor() as cursor:
+        # Read a single record
+        sql = "SELECT `*` FROM `board`"
+        cursor.execute(sql)
+        result = cursor.fetchall()
+    for i in result:
+        if i["name"] == "Ayush":
+            i["hls"] = True
+        else: 
+            i["hls"] = False
+        print(i["name"], i["hls"])
+    return render_template("home.html", table=result)
 
 @app.route('/dashboard')
 def dashboard():
@@ -46,17 +57,18 @@ def dashboard():
     
 @app.route('/list')
 def list():
-    sleep(10)
-    pricesum = 0
     with connection.cursor() as cursor:
         # Read a single record
-        sql = "SELECT `*` FROM `items` WHERE `user`=%s"
-        cursor.execute(sql, (getEmail(),))
+        sql = "SELECT `*` FROM `board`"
+        cursor.execute(sql)
         result = cursor.fetchall()
-        for i in result:
-            pricesum += i['quantity'] * i['price']
-            i['price'] = "$%0.2f" % i['price']
-    return render_template("dashboard.html", table=result, pricesum=("$%0.2f" % pricesum))
+    for i in result:
+        if i["name"] == "Ayush":
+            i["hls"] = True
+        else: 
+            i["hls"] = False
+        print(i["name"], i["hls"])
+    return render_template("dashboard.html", table=result)
 
 @app.route('/family')
 def family():

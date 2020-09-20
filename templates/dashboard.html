@@ -57,32 +57,33 @@
   }
   </style>
   <br /> <br /> <br /> <br /> 
-  <table class="table">
+  <table  class="table">
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Item</th>
-        <th scope="col">Owner</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Price</th>
-        <th scope="col">Description</th>
+        <th scope="col">Top Savers 🧑👧</th>
+        <th scope="col">Bolts ⚡</th>
+        <th scope="col">Carbon 🔥</th>
+        <th scope="col">Operating System 🍎🐧</th>
       </tr>
     </thead>
     <tbody>
-        {% for i in table: %}
-          <tr>
-            <th scope="row"><button type="button" class="btn btn-primary" onclick="openForm({{ i['item_id'] }})" id="{{ i['item_id'] }}x0">{{ i['item_id'] }}</button></th>
-            <td id="{{ i['item_id'] }}x1">{{ i['name'] }}</td>
-            <td id="{{ i['item_id'] }}x2">{{ i['user'] }}</td>
-            <td id="{{ i['item_id'] }}x3">{{ i['quantity'] }}</td>
-            <td id="{{ i['item_id'] }}x4">{{ i['price'] }}</td>
-            <td id="{{ i['item_id'] }}x5">{{ i['description'] }}</td>
-          </tr>
-        {% endfor %}
+      {% for i in table: %}
+        {% if i['hls'] %}
+        <tr class="table-active">
+        {% else %}
+        <tr>
+        {% endif %}
+          <th scope="row">{{ i['id'] }}</button></th>
+          <td>{{ i['name'] }}</td>
+          <td>{{ i['bolts'] }}</td>
+          <td>{{ i['carbon'] }}</td>
+          <td>{{ i['os'] }}</td>
+        </tr>
+      {% endfor %}
     </tbody>
   </table>
 
-  <h1>Grand Total: {{ pricesum }}</h1>
 
   <div class="form-popup" id="myForm" >
     <form class="form-container" action="{{ url_for('updatedb') }}" method="post">
