@@ -81,21 +81,37 @@
                 <b>3rd out of 10</b>
             </div>
         </div>
-        <div class="column" style="border: 4px solid black; height: 600px; width: 62%; ">
-            <div class="row" style="width: 80%; margin: 0 30px">
+        <div class="column" style="border: 4px solid black; height: 500px; width: 62%; ">
+            <div class="row" style="width: 80%; margin: 0 80px">
                 <div class="column" style="width:40%">
-                    <h2 style="text-align: left; color: #000000">Leaderboard</h2> 
+                    <h2 style="text-align: left; color: #000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Leaderboard</h2> 
                 </div>
-                <table class="table">
+                <br><br><br><br>
+                <table  class="table">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">User 🧑👧</th>
+                      <th scope="col">Top Savers 🧑👧</th>
                       <th scope="col">Bolts ⚡</th>
                       <th scope="col">Carbon 🔥</th>
-                      <th scope="col">Operating System ⊞🍎🐧</th>
+                      <th scope="col">Operating System 🍎🐧</th>
                     </tr>
                   </thead>
+                  <tbody>
+                    {% for i in table: %}
+                      {% if i['hls'] %}
+                      <tr class="table-active">
+                      {% else %}
+                      <tr>
+                      {% endif %}
+                        <th scope="row">{{ i['id'] }}</button></th>
+                        <td>{{ i['name'] }}</td>
+                        <td>{{ i['bolts'] }}</td>
+                        <td>{{ i['carbon'] }}</td>
+                        <td>{{ i['os'] }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
                 </table>
             </div>
         </div>
